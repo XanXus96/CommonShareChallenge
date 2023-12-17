@@ -1,4 +1,4 @@
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const api_base_url = config.public.API_BASE_URL;
 
@@ -6,5 +6,5 @@ export default defineEventHandler((event) => {
 
   const id = event?.context?.params?.id;
 
-  return $fetch(`${api_base_url}/cars/${id}?${params}`);
+  return await $fetch(`${api_base_url}/cars/${id}?${params}`);
 });

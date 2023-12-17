@@ -1,11 +1,6 @@
 <template>
-  <div class="my-5">
-    <img class="min-w-[200px] my-12" :src="img" :alt="id" />
-    <div class="flex items-center justify-between text-gray-400 font-light text-sm">
-      <span class="flex items-center"><GasIcon /> {{ gasolineLiter }}L</span>
-      <span class="flex items-center"><TransmissionIcon /> {{ kindOfTransition }}</span>
-      <span class="flex items-center"><PeopleIcon /> {{ people }}People</span>
-    </div>
+  <div class="min-h-[180px] flex items-center justify-center">
+    <img class="min-w-[200px] h-fit" :src="img" :alt="id" />
   </div>
 </template>
 
@@ -17,18 +12,6 @@ const props = defineProps({
   },
   img: {
     type: String,
-    required: true,
-  },
-  gasolineLiter: {
-    type: Number,
-    required: true,
-  },
-  kindOfTransition: {
-    type: String,
-    required: true,
-  },
-  people: {
-    type: Number,
     required: true,
   },
 });

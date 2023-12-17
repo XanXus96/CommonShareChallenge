@@ -11,9 +11,9 @@
 
 <script setup>
 const props = defineProps({
-  searchTerm: {
-    type: String,
-    default: null,
+  isSearch: {
+    type: Boolean,
+    default: false,
   },
 });
 const carsStore = useCarsStore();
@@ -22,7 +22,7 @@ const isLoading = ref(false);
 
 const onClick = async (e) => {
   isLoading.value = true;
-  await carsStore.loadMore();
+  await carsStore.loadMore(props.isSearch);
   isLoading.value = false;
 };
 

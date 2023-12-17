@@ -34,6 +34,9 @@ export const useCarsStore = defineStore("carsStore", {
     isLoadMoreActive(): boolean {
       return this.currentPage < this.lastPage;
     },
+    isLoadMoreSearchActive(): boolean {
+      return this.currentSearchPage < this.lastSearchPage;
+    },
   },
 
   actions: {
@@ -47,7 +50,7 @@ export const useCarsStore = defineStore("carsStore", {
       this.total = 0;
       this.currentPage = 1;
       this.lastPage = 1;
-      this.allCars.splice(0, this.searchCars.length);
+      this.allCars.splice(0, this.allCars.length);
     },
     resetSearch(): void {
       this.search = null;
@@ -87,7 +90,8 @@ export const useCarsStore = defineStore("carsStore", {
 
       return car;
     },
-    async searchCars(search: string): Promise<void> {
+    async searchInCars(search: string): Promise<void> {
+      this.resetSearch();
       this.search = search;
 
       const callback = (context: { response: any }) => {

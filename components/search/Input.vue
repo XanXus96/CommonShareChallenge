@@ -5,6 +5,7 @@
     v-model="model"
     :name="name"
     :placeholder="placeholder"
+    @keyup.enter="onEnter"
   />
 </template>
 
@@ -24,6 +25,8 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["change", "submit"]);
+
 const model = computed({
   get() {
     return props.value;
@@ -32,4 +35,6 @@ const model = computed({
     emit("change", value);
   },
 });
+
+const onEnter = (e) => emit("submit", e.target.value);
 </script>
