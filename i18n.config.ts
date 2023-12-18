@@ -8,6 +8,7 @@ export default defineI18nConfig(() => ({
       loading: "loading..",
       recommendationCars: "Recommendation Cars",
       popularCars: "Popular Cars",
+      favouriteCars: "Favourite Cars",
       search: {
         input: {
           placeholder: "Search something here",

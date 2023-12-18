@@ -6,7 +6,7 @@
       <h5 class="text-lg md:text-xl lg:text-3xl font-semibold text-gray-900">
         {{ car.name }}
       </h5>
-      <HeartIcon />
+      <FavouriteIcon :car="car" />
     </div>
     <div class="text-md md:text-lg lg:text-xl text-gray-400 font-light">
       NISMO has become the embodiment of Nissan's outstanding performance,

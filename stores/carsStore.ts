@@ -59,6 +59,17 @@ export const useCarsStore = defineStore("carsStore", {
       this.lastSearchPage = 1;
       this.searchCars.splice(0, this.searchCars.length);
     },
+    addToFavourite(car: Car): void {
+      if (this.favouriteCars.findIndex(c => c.id === car.id) === -1) {
+        this.favouriteCars.push(car)
+      }
+    },
+    removeFromFavourite(car: Car): void {
+      const index = this.favouriteCars.findIndex(c => c.id === car.id)
+      if (index > -1) {
+        this.favouriteCars.splice(index, 1)
+      }
+    },
     async getAllCars(): Promise<void> {
       const callback = (context: { response: any }) => {
         const results = context.response._data;

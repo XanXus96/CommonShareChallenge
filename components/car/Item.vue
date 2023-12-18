@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 bg-white border border-gray-200 rounded-lg shadow">
-    <CarItemHeader :id="car.id" :name="car.name" :type="car.type" />
+    <CarItemHeader :car="car"/>
     <CarItemBody :id="car.id" :img="car.img" />
     <CarItemFooter
       :id="car.id"

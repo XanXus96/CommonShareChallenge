@@ -4,8 +4,8 @@
       <Logo />
     </nuxt-link>
     <Search />
-    <div class="border bg-background p-2 rounded-full">
-      <HeartIcon />
-    </div>
+    <nuxt-link class="border bg-background p-2 rounded-full" to="/favourites">
+      <HeartIcon/>
+    </nuxt-link>
   </header>
 </template>
