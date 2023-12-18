@@ -4,7 +4,7 @@
     {{ $t("loading") }}
   </div>
   <template v-else>
-    <Cars :label="$t('popularCars')" :cars="carsStore.popularCars" />
+    <Cars :label="$t('popularCars')" :cars="carsStore.popularCars" :is-overflowing="true" />
     <div class="mt-4">
       <Cars :label="$t('recommendationCars')" :cars="carsStore.allCars" />
       <LoadMore class="my-3" v-if="carsStore.isLoadMoreActive" />
