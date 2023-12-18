@@ -6,6 +6,8 @@ export default defineI18nConfig(() => ({
       appName: "DM",
       loadMore: "Show more cars",
       loading: "loading..",
+      recommendationCars: "Recommendation Cars",
+      popularCars: "Popular Cars",
       search: {
         input: {
           placeholder: "Search something here",

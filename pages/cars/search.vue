@@ -1,28 +1,18 @@
 <template>
   <div class="flex items-center justify-center" v-if="isLoading">
-    {{ $t("loading") }} Popular Cars
+    {{ $t("loading") }}
   </div>
   <template v-else>
-    <template v-if="search">
-      <Cars
-        :label="'Search: ' + search"
-        :cars="carsStore.searchCars"
-        :fallbackMessage="'No search results for: ' + search"
-      />
-      <LoadMore
-        class="my-3"
-        :is-search="true"
-        v-if="carsStore.isLoadMoreSearchActive"
-      />
-    </template>
-    <template v-else>
-      <Cars
-        label="All cars"
-        :cars="carsStore.allCars"
-        fallbackMessage="No cars"
-      />
-      <LoadMore class="my-3" v-if="carsStore.isLoadMoreActive" />
-    </template>
+    <Cars
+      :label="'Search: ' + search"
+      :cars="carsStore.searchCars"
+      :fallbackMessage="'No search results for: ' + search"
+    />
+    <LoadMore
+      class="my-3"
+      :is-search="true"
+      v-if="carsStore.isLoadMoreSearchActive"
+    />
   </template>
 </template>
 <script setup>
@@ -31,16 +21,12 @@ const carsStore = useCarsStore();
 
 const isLoading = ref(false);
 
-const search = computed(() => route.query.q);
+const search = computed(() => route.query.q || "");
 
-onBeforeMount(async () => {
+onMounted(async () => {
   if (search.value !== carsStore.search) {
     isLoading.value = true;
-    if (search.value) {
-      await carsStore.searchInCars(search.value);
-    } else {
-      await carsStore.getAllCars();
-    }
+    await carsStore.searchInCars(search.value);
     isLoading.value = false;
   }
 });
