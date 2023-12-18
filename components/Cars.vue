@@ -12,7 +12,7 @@
     >
       <CarItem v-for="car in cars" :key="car.id" :car="car" />
     </div>
-    <div class="flex items-center justify-center" v-else>
+    <div class="flex items-center justify-center my-24" v-else>
       {{ fallbackMessage }}
     </div>
   </div>

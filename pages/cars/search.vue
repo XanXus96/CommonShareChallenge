@@ -23,15 +23,19 @@ const isLoading = ref(false);
 
 const search = computed(() => route.query.q || "");
 
-onMounted(async () => {
-  if (search.value !== carsStore.search) {
-    isLoading.value = true;
-    await carsStore.searchInCars(search.value);
-    isLoading.value = false;
-  }
+const loadSearch = async () => {
+  isLoading.value = true;
+  await carsStore.searchInCars(search.value);
+  isLoading.value = false;
+};
+
+onBeforeMount(async () => {
+  await loadSearch();
 });
 
 onBeforeUnmount(() => {
   carsStore.resetSearch();
 });
+
+watch(() => search.value, loadSearch);
 </script>

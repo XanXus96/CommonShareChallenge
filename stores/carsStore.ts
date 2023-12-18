@@ -46,12 +46,6 @@ export const useCarsStore = defineStore("carsStore", {
       await this.getAllCars();
       await this.getPopularCars();
     },
-    reset(): void {
-      this.total = 0;
-      this.currentPage = 1;
-      this.lastPage = 1;
-      this.allCars.splice(0, this.allCars.length);
-    },
     resetSearch(): void {
       this.search = null;
       this.searchTotal = 0;
@@ -60,14 +54,14 @@ export const useCarsStore = defineStore("carsStore", {
       this.searchCars.splice(0, this.searchCars.length);
     },
     addToFavourite(car: Car): void {
-      if (this.favouriteCars.findIndex(c => c.id === car.id) === -1) {
-        this.favouriteCars.push(car)
+      if (this.favouriteCars.findIndex((c) => c.id === car.id) === -1) {
+        this.favouriteCars.push(car);
       }
     },
     removeFromFavourite(car: Car): void {
-      const index = this.favouriteCars.findIndex(c => c.id === car.id)
+      const index = this.favouriteCars.findIndex((c) => c.id === car.id);
       if (index > -1) {
-        this.favouriteCars.splice(index, 1)
+        this.favouriteCars.splice(index, 1);
       }
     },
     async getAllCars(): Promise<void> {
@@ -118,33 +112,29 @@ export const useCarsStore = defineStore("carsStore", {
       await carsService.findCars({ query, callback });
     },
     async loadMore(isSearch: Boolean = false): Promise<void> {
-      if (isSearch) {
-        if (this.currentSearchPage < this.lastSearchPage) {
-          const callback = (context: { response: any }) => {
-            const results = context.response._data;
-            this.searchCars.push(...results.data);
-            this.searchTotal = results.meta.total;
-            this.lastSearchPage = results.meta.last_page;
-          };
+      let callback, query;
 
-          const query = { page: ++this.currentSearchPage };
+      if (isSearch && this.currentSearchPage < this.lastSearchPage) {
+        callback = (context: { response: any }) => {
+          const results = context.response._data;
+          this.searchCars.push(...results.data);
+          this.searchTotal = results.meta.total;
+          this.lastSearchPage = results.meta.last_page;
+        };
 
-          await carsService.findCars({ query, callback });
-        }
-      } else {
-        if (this.currentPage < this.lastPage) {
-          const callback = (context: { response: any }) => {
-            const results = context.response._data;
-            this.allCars.push(...results.data);
-            this.total = results.meta.total;
-            this.lastPage = results.meta.last_page;
-          };
+        query = { page: ++this.currentSearchPage };
+      } else if (this.currentPage < this.lastPage) {
+        callback = (context: { response: any }) => {
+          const results = context.response._data;
+          this.allCars.push(...results.data);
+          this.total = results.meta.total;
+          this.lastPage = results.meta.last_page;
+        };
 
-          const query = { page: ++this.currentPage };
-
-          await carsService.findCars({ query, callback });
-        }
+        query = { page: ++this.currentPage };
       }
+
+      await carsService.findCars({ query, callback });
     },
   },
 });

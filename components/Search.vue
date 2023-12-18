@@ -13,10 +13,8 @@
 
 <script setup>
 const router = useRouter();
-const carsStore = useCarsStore();
 
 const onSubmitSearch = async (value) => {
-  await carsStore.searchInCars(value);
   router.push({
     path: `/cars/search`,
     query: {
